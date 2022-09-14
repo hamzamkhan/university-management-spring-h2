@@ -3,8 +3,8 @@ package com.hamzamustafakhan.springh2student.controller;
 import com.hamzamustafakhan.springh2student.constants.Constants;
 import com.hamzamustafakhan.springh2student.domain.GenericResponse;
 import com.hamzamustafakhan.springh2student.dto.StudentDTO;
-import com.hamzamustafakhan.springh2student.entity.Student;
-import com.hamzamustafakhan.springh2student.service.StudentService;
+import com.hamzamustafakhan.springh2student.entity.Professor;
+import com.hamzamustafakhan.springh2student.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,43 +13,43 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("/api/student")
+@RequestMapping("/api/professor")
 @RestController
-public class StudentController {
+public class ProfessorController {
 
     @Autowired
-    private StudentService studentService;
+    private ProfessorService professorService;
 
     @PostMapping
-    public ResponseEntity<GenericResponse> saveStudent(@Valid @RequestBody StudentDTO studentDTO) throws Exception{
-        String responseStudent = studentService.createStudent(studentDTO);
-        GenericResponse<String> response = new GenericResponse<>();
-        response.setStatus(Constants.SUCCESS);
-        response.setResponse(responseStudent);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<GenericResponse> createProfessor(@Valid @RequestBody Professor professor){
+        GenericResponse<String> genericResponse = new GenericResponse<>();
+        String response = professorService.createProfessor(professor);
+        genericResponse.setResponse(response);
+        genericResponse.setStatus(Constants.SUCCESS);
+        return new ResponseEntity<>(genericResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GenericResponse> studentById(@PathVariable("id") int id){
-        StudentDTO studentDTO = studentService.findStudentById(id);
-        GenericResponse<StudentDTO> response = new GenericResponse<>();
+    public ResponseEntity<GenericResponse> professorById(@PathVariable("id") int id){
+        Professor professor = professorService.findProfessorById(id);
+        GenericResponse<Professor> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
-        response.setResponse(studentDTO);
+        response.setResponse(professor);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/list")
     public ResponseEntity<GenericResponse> listStudents(){
-        List<StudentDTO> studentDTOs = studentService.getStudents();
+        List<Professor> professors = professorService.getProfessors();
         GenericResponse<List> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
-        response.setResponse(studentDTOs);
+        response.setResponse(professors);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<GenericResponse> deleteStudentById(@PathVariable("id") int id){
-        String deleteResponse = studentService.deleteStudent(id);
+        String deleteResponse = professorService.deleteProfessor(id);
         GenericResponse<String> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
         response.setResponse(deleteResponse);
@@ -58,10 +58,11 @@ public class StudentController {
 
     @PutMapping("/{id}")
     public ResponseEntity<GenericResponse> updateStudent(@PathVariable("id") int id, @RequestBody String email){
-        String updateResponse = studentService.updateStudentEmail(id, email);
+        String updateResponse = professorService.updateProfessorEmail(id, email);
         GenericResponse<String> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
         response.setResponse(updateResponse);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 }
