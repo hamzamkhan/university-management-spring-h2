@@ -1,5 +1,6 @@
 package com.hamzamustafakhan.springh2student.service.impl;
 
+import com.hamzamustafakhan.springh2student.constants.Constants;
 import com.hamzamustafakhan.springh2student.dao.DegreeDAO;
 import com.hamzamustafakhan.springh2student.dao.MajorDAO;
 import com.hamzamustafakhan.springh2student.dao.StudentDAO;
@@ -52,7 +53,7 @@ public class StudentServiceImpl implements StudentService {
         student.setCreatedAt(new Date());
 
         studentDAO.save(student);
-        return "Created";
+        return Constants.CREATED;
     }
 
     @Override
@@ -94,7 +95,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public String deleteStudent(int id) {
         studentDAO.deleteById(id);
-        return "SUCCESS";
+        return Constants.SUCCESS;
     }
 
     @Override
@@ -107,6 +108,6 @@ public class StudentServiceImpl implements StudentService {
         student.setUpdatedAt(new Date());
         studentDAO.save(student);
 
-        return "Updated";
+        return Constants.UPDATED;
     }
 }
