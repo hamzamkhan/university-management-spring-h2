@@ -2,6 +2,7 @@ package com.hamzamustafakhan.springh2student.controller;
 
 import com.hamzamustafakhan.springh2student.constants.Constants;
 import com.hamzamustafakhan.springh2student.domain.GenericResponse;
+import com.hamzamustafakhan.springh2student.dto.ProfessorDTO;
 import com.hamzamustafakhan.springh2student.dto.StudentDTO;
 import com.hamzamustafakhan.springh2student.entity.Professor;
 import com.hamzamustafakhan.springh2student.service.ProfessorService;
@@ -21,9 +22,9 @@ public class ProfessorController {
     private ProfessorService professorService;
 
     @PostMapping
-    public ResponseEntity<GenericResponse> createProfessor(@Valid @RequestBody Professor professor){
+    public ResponseEntity<GenericResponse> createProfessor(@Valid @RequestBody ProfessorDTO professorDTO){
         GenericResponse<String> genericResponse = new GenericResponse<>();
-        String response = professorService.createProfessor(professor);
+        String response = professorService.createProfessor(professorDTO);
         genericResponse.setResponse(response);
         genericResponse.setStatus(Constants.SUCCESS);
         return new ResponseEntity<>(genericResponse, HttpStatus.OK);
@@ -31,8 +32,8 @@ public class ProfessorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<GenericResponse> professorById(@PathVariable("id") int id){
-        Professor professor = professorService.findProfessorById(id);
-        GenericResponse<Professor> response = new GenericResponse<>();
+        ProfessorDTO professor = professorService.findProfessorInfoById(id);
+        GenericResponse<ProfessorDTO> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
         response.setResponse(professor);
         return new ResponseEntity<>(response, HttpStatus.OK);

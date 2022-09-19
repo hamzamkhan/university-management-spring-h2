@@ -57,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO findStudentById(int id) {
+    public StudentDTO findStudentInfoById(int id) {
         StudentDTO studentDTO = new StudentDTO();
         Optional<Student> optionalStudent = studentDAO.findById(id);
         Student student = optionalStudent.get();
@@ -109,5 +109,13 @@ public class StudentServiceImpl implements StudentService {
         studentDAO.save(student);
 
         return Constants.UPDATED;
+    }
+
+    @Override
+    public Student findStudentById(int id) {
+        Optional<Student> optionalStudent = studentDAO.findById(id);
+        Student student = optionalStudent.get();
+
+        return student;
     }
 }

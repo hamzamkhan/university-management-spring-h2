@@ -14,7 +14,13 @@ public class Registration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "student")
+    @ManyToOne
+    @JoinColumn(name = "student", nullable = false)
     private Student student;
+    @ManyToOne
+    @JoinColumn(name = "course", nullable = false)
+    private Course course;
+    @ManyToOne
+    @JoinColumn(name = "professor", nullable = false)
+    private Professor professor;
 }
