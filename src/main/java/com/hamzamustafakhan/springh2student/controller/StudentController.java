@@ -31,7 +31,7 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<GenericResponse> studentById(@PathVariable("id") int id){
-        StudentDTO studentDTO = studentService.findStudentById(id);
+        StudentDTO studentDTO = studentService.findStudentInfoById(id);
         GenericResponse<StudentDTO> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
         response.setResponse(studentDTO);

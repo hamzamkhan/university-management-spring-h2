@@ -2,6 +2,7 @@ package com.hamzamustafakhan.springh2student.service.impl;
 
 import com.hamzamustafakhan.springh2student.constants.Constants;
 import com.hamzamustafakhan.springh2student.dao.ProfessorDAO;
+import com.hamzamustafakhan.springh2student.dto.ProfessorDTO;
 import com.hamzamustafakhan.springh2student.entity.Professor;
 import com.hamzamustafakhan.springh2student.service.ProfessorService;
 import com.hamzamustafakhan.springh2student.util.Utility;
@@ -23,10 +24,14 @@ public class ProfessorServiceImpl implements ProfessorService {
     private ProfessorDAO professorDAO;
 
     @Override
-    public String createProfessor(Professor professor) {
-        if(professorDAO.findByEmail(professor.getEmail()) != null){
+    public String createProfessor(ProfessorDTO professorDTO) {
+        if(professorDAO.findByEmail(professorDTO.getEmail()) != null){
             return "PROFESSOR EXISTS";
         }
+        Professor professor = new Professor();
+        professor.setEmail(professorDTO.getEmail());
+        professor.setName(professorDTO.getName());
+        professor.setMobile(professorDTO.getMobile());
         professor.setCreatedAt(new Date());
         professorDAO.save(professor);
 
@@ -36,7 +41,16 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public Professor findProfessorById(int id) {
         Optional<Professor> optionalProfessor = professorDAO.findById(id);
-        return optionalProfessor.get();
+        Professor professor = optionalProfessor.get();
+        return professor;
+    }
+
+    @Override
+    public ProfessorDTO findProfessorInfoById(int id) {
+        Optional<Professor> optionalProfessor = professorDAO.findById(id);
+        Professor professor = optionalProfessor.get();
+        ProfessorDTO professorDTO = new ProfessorDTO(professor.getName(), professor.getEmail(), professor.getMobile());
+        return professorDTO;
     }
 
     @Override

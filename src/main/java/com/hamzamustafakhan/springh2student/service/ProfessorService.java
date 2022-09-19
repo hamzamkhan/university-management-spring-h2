@@ -1,19 +1,22 @@
 package com.hamzamustafakhan.springh2student.service;
 
 
+import com.hamzamustafakhan.springh2student.dto.ProfessorDTO;
 import com.hamzamustafakhan.springh2student.entity.Professor;
 
 import java.util.List;
 
 public interface ProfessorService {
-    String createProfessor(Professor professor);
+    String createProfessor(ProfessorDTO professorDTO);
 
-    Professor findProfessorById(int id);
+    ProfessorDTO findProfessorInfoById(int id);
 
     List<Professor> getProfessors();
 
     String deleteProfessor(int id);
 
     String updateProfessorEmail(int id, String email);
+
+    Professor findProfessorById(int id);
 }
 
