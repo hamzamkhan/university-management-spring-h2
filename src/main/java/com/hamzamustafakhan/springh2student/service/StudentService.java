@@ -16,4 +16,5 @@ public interface StudentService {
     String updateStudentEmail(int id, String email);
 
     Student findStudentById(int id);
+    StudentDTO updateStudent(int id, StudentDTO studentDTO) throws Exception;
 }
