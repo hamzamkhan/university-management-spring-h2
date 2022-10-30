@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentDTO {
+    private String id;
+
     @NotBlank(message = "Name is required")
     private String name;
 

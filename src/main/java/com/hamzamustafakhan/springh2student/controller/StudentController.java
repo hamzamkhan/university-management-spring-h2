@@ -56,12 +56,22 @@ public class StudentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<GenericResponse> updateStudent(@PathVariable("id") int id, @RequestBody String email){
+    @PutMapping("/email/{id}")
+    public ResponseEntity<GenericResponse> updateStudentEmail(@PathVariable("id") int id, @RequestBody String email){
         String updateResponse = studentService.updateStudentEmail(id, email);
         GenericResponse<String> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
         response.setResponse(updateResponse);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GenericResponse> updateStudent(@PathVariable("id") int id, @RequestBody StudentDTO studentDTO) throws Exception {
+        GenericResponse<StudentDTO> genericResponse = new GenericResponse<>();
+        StudentDTO responseDTO = studentService.updateStudent(id, studentDTO);
+        genericResponse.setResponse(responseDTO);
+        genericResponse.setStatus(Constants.SUCCESS);
+
+        return new ResponseEntity<>(genericResponse, HttpStatus.OK);
     }
 }
