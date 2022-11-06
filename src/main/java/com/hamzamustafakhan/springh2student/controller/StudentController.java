@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/api/student")
+@CrossOrigin
 @RestController
 public class StudentController {
 

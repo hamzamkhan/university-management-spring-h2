@@ -35,7 +35,8 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private MajorDAO majorDAO;
 
-    private DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private DateFormat dateFormatUI = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public String createStudent(StudentDTO studentDTO) throws Exception {
@@ -72,7 +73,7 @@ public class StudentServiceImpl implements StudentService {
         studentDTO.setName(student.getName());
         studentDTO.setDegree(student.getDegree().getName());
         studentDTO.setEmail(student.getEmail());
-        studentDTO.setDob(dateFormat.format(student.getDob()));
+        studentDTO.setDob(dateFormatUI.format(student.getDob()));
         studentDTO.setFathersname(student.getFathersName());
         studentDTO.setBatchYear(student.getBatchYear());
         return studentDTO;
@@ -127,23 +128,27 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO updateStudent(int id, StudentDTO studentDTO) throws Exception {
-        Optional<Student> optionalStudent = studentDAO.findById(id);
-        Student student = optionalStudent.get();
+        try {
+            Optional<Student> optionalStudent = studentDAO.findById(id);
+            Student student = optionalStudent.get();
 
-        Optional<Degree> optionalDegree = degreeDAO.findById(Integer.parseInt(studentDTO.getDegree()));
-        Optional<Major> optionalMajor = majorDAO.findById(Integer.parseInt(studentDTO.getMajor()));
-        Date dob = new SimpleDateFormat("dd/MM/yyyy").parse(studentDTO.getDob());
+            Optional<Degree> optionalDegree = degreeDAO.findById(Integer.parseInt(studentDTO.getDegree()));
+            Optional<Major> optionalMajor = majorDAO.findById(Integer.parseInt(studentDTO.getMajor()));
+            Date dob = new SimpleDateFormat("dd/MM/yyyy").parse(studentDTO.getDob());
 
-        student.setDob(dob);
-        student.setName(studentDTO.getName());
-        student.setFathersName(studentDTO.getFathersname());
-        student.setEmail(studentDTO.getEmail());
-        student.setBatchYear(studentDTO.getBatchYear());
-        student.setMajor(optionalMajor.get());
-        student.setDegree(optionalDegree.get());
-        student.setUpdatedAt(new Date());
+             student.setDob(dob);
+            student.setName(studentDTO.getName());
+            student.setFathersName(studentDTO.getFathersname());
+            student.setEmail(studentDTO.getEmail());
+            student.setBatchYear(studentDTO.getBatchYear());
+            student.setMajor(optionalMajor.get());
+            student.setDegree(optionalDegree.get());
+            student.setUpdatedAt(new Date());
 
-        studentDAO.save(student);
+            studentDAO.saveAndFlush(student);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
 
         return studentDTO;
