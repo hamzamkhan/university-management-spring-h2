@@ -1,4 +1,4 @@
-package com.hamzamustafakhan.springh2student;
+package com.hamzamustafakhan.springh2student.unit;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -98,7 +98,7 @@ class SpringH2StudentApplicationTests {
     void updateStudent(){
         log.info("Testing: update student");
         createStudent();
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/student/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/student/email/1")
                 .content("{\n" +
                         "    \"hmkscorpio@gmail.com\"\n" +
                         "}")

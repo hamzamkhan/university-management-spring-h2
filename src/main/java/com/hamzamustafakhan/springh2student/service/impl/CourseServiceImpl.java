@@ -6,6 +6,7 @@ import com.hamzamustafakhan.springh2student.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,5 +20,10 @@ public class CourseServiceImpl implements CourseService {
         Optional<Course> optionalCourse = courseDAO.findById(id);
         Course course = optionalCourse.get();
         return course;
+    }
+
+    @Override
+    public List<Course> findAll() {
+        return courseDAO.findAll();
     }
 }

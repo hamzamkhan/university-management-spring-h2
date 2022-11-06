@@ -11,7 +11,7 @@ const StudentList = () => {
     useEffect(() => {
         setLoading(true);
 
-        fetch("student/list")
+        fetch("http://localhost:2000/api/student/list")
         .then(response => response.json())
         .then(data => {
             setStudents(data['response']);
@@ -20,7 +20,7 @@ const StudentList = () => {
     }, []);
 
     const remove = async(id) => {
-        await fetch(`student/${id}`, {
+        await fetch(`http://localhost:2000/api/student/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -54,7 +54,7 @@ const StudentList = () => {
             <AppNavbar/>
             <Container fluid>
                 <div className='float-end'>
-                    <Button color='success' tag={Link} to="/student/new">Add Student</Button>
+                    <Button id='add-student-btn' color='success' tag={Link} to="/student/new">Add Student</Button>
                 </div>
                 <h3>Student Management</h3>
                 <Table className='mt-2'>

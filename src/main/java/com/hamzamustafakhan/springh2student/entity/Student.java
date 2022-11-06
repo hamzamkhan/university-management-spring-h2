@@ -27,12 +27,10 @@ public class Student {
     @Column
     private Date dob;
     @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "program")
-    @NotNull
+    @JoinColumn(name = "major")
     private Major major;
     @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "degree")
-    @NotNull
+    @JoinColumn(name = "degree")
     private Degree degree;
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
