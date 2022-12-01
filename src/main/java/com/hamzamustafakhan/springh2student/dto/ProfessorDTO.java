@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProfessorDTO {
+    private String id;
     @NotBlank(message = "Name is required")
     private String name;
     @Email(message = "Email should follow the proper pattern")
@@ -21,4 +22,6 @@ public class ProfessorDTO {
     @NotBlank(message = "Mobile number is required")
     @Length(min = 11, max = 11, message = "Mobile should be of 11 digits")
     private String mobile;
+    @NotBlank(message = "Date of birth is required")
+    private String dob;
 }

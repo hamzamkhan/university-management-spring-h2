@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 @RunWith(SpringRunner.class)
-class SpringH2StudentApplicationTests {
+class UniversityManagementApplicationTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -115,9 +115,10 @@ class SpringH2StudentApplicationTests {
         log.info("Testing: create professor");
         mockMvc.perform(MockMvcRequestBuilders.post("/api/professor")
                 .content("{\n" +
-                        "    \"name\":\"John Doe\",\n" +
-                        "    \"email\":\"johndoe@gmail.com\",\n" +
-                        "    \"mobile\":\"03333232939\"\n" +
+                        " \"name\":\"John Doe\",\n" +
+                        "\"email\":\"johndoe@gmail.com\",\n" +
+                        "\"mobile\":\"03333232939\",\n" +
+                        "\"dob\":\"26/10/1996\"\n" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -133,7 +134,8 @@ class SpringH2StudentApplicationTests {
                         .content("{\n" +
                                 "    \"name\":\"John Doe\",\n" +
                                 "    \"email\":\"johndoe@gmail.com\",\n" +
-                                "    \"mobile\":\"03333232939\"\n" +
+                                "    \"mobile\":\"03333232939\",\n" +
+                                "    \"dob\":\"26/10/1996\"\n" +
                                 "}")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

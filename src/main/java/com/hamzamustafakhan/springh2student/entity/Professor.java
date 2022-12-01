@@ -35,4 +35,6 @@ public class Professor {
     @Column(name = "updated_at")
     @Nullable
     private Date updatedAt;
+    @Column
+    private Date dob;
 }

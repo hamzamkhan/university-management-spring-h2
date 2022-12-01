@@ -12,9 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 
 @RequestMapping("/api/professor")
+@CrossOrigin
 @RestController
 public class ProfessorController {
 
@@ -22,7 +24,7 @@ public class ProfessorController {
     private ProfessorService professorService;
 
     @PostMapping
-    public ResponseEntity<GenericResponse> createProfessor(@Valid @RequestBody ProfessorDTO professorDTO){
+    public ResponseEntity<GenericResponse> createProfessor(@Valid @RequestBody ProfessorDTO professorDTO) throws ParseException {
         GenericResponse<String> genericResponse = new GenericResponse<>();
         String response = professorService.createProfessor(professorDTO);
         genericResponse.setResponse(response);
@@ -40,8 +42,8 @@ public class ProfessorController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<GenericResponse> listStudents(){
-        List<Professor> professors = professorService.getProfessors();
+    public ResponseEntity<GenericResponse> listProfessors(){
+        List<ProfessorDTO> professors = professorService.getProfessors();
         GenericResponse<List> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
         response.setResponse(professors);
@@ -49,7 +51,7 @@ public class ProfessorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<GenericResponse> deleteStudentById(@PathVariable("id") int id){
+    public ResponseEntity<GenericResponse> deleteProfessorById(@PathVariable("id") int id){
         String deleteResponse = professorService.deleteProfessor(id);
         GenericResponse<String> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
@@ -57,13 +59,23 @@ public class ProfessorController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<GenericResponse> updateStudent(@PathVariable("id") int id, @RequestBody String email){
+    @PutMapping("/email/{id}")
+    public ResponseEntity<GenericResponse> updateProfessorEmail(@PathVariable("id") int id, @RequestBody String email){
         String updateResponse = professorService.updateProfessorEmail(id, email);
         GenericResponse<String> response = new GenericResponse<>();
         response.setStatus(Constants.SUCCESS);
         response.setResponse(updateResponse);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GenericResponse> updateProfessor(@PathVariable("id") int id, @RequestBody ProfessorDTO professorDTO){
+        GenericResponse<ProfessorDTO> genericResponse = new GenericResponse<>();
+        ProfessorDTO responseDTO = professorService.updateProfessor(id, professorDTO);
+        genericResponse.setResponse(responseDTO);
+        genericResponse.setStatus(Constants.SUCCESS);
+
+        return new ResponseEntity<>(genericResponse, HttpStatus.OK);
     }
 
 }

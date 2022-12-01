@@ -46,7 +46,7 @@ public class StudentServiceImpl implements StudentService {
         Optional<Degree> optionalDegree = degreeDAO.findById(Integer.parseInt(studentDTO.getDegree()));
         Optional<Major> optionalMajor = majorDAO.findById(Integer.parseInt(studentDTO.getMajor()));
         Student student = new Student();
-        Date dob = new SimpleDateFormat("dd/MM/yyyy").parse(studentDTO.getDob());
+        Date dob = dateFormat.parse(studentDTO.getDob());
 
         student.setDob(dob);
         student.setName(studentDTO.getName());
@@ -134,9 +134,9 @@ public class StudentServiceImpl implements StudentService {
 
             Optional<Degree> optionalDegree = degreeDAO.findById(Integer.parseInt(studentDTO.getDegree()));
             Optional<Major> optionalMajor = majorDAO.findById(Integer.parseInt(studentDTO.getMajor()));
-            Date dob = new SimpleDateFormat("dd/MM/yyyy").parse(studentDTO.getDob());
+            Date dob = dateFormat.parse(studentDTO.getDob());
 
-             student.setDob(dob);
+            student.setDob(dob);
             student.setName(studentDTO.getName());
             student.setFathersName(studentDTO.getFathersname());
             student.setEmail(studentDTO.getEmail());
