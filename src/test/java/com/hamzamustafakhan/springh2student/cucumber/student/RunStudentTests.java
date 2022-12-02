@@ -5,8 +5,8 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty"},
+@CucumberOptions(plugin = {"json:target/cucumber.json", "pretty","html:target/cucumber-report-html/cucumber-html-reports/cucumber-student.html"},
 features = "src/test/java/com/hamzamustafakhan/springh2student/cucumber/student/features",
-        glue = {"com.hamzamustafakhan.springh2student.cucumber.student","com.hamzamustafakhan.springh2student"})
+        glue = {"com.hamzamustafakhan.springh2student.cucumber.student.stepdefinitions","com.hamzamustafakhan.springh2student"})
 public class RunStudentTests {
 }
