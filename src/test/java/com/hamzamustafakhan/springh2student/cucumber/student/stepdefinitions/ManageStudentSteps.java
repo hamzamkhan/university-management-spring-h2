@@ -1,4 +1,4 @@
-package com.hamzamustafakhan.springh2student.cucumber.student;
+package com.hamzamustafakhan.springh2student.cucumber.student.stepdefinitions;
 
 
 import io.cucumber.java.Before;

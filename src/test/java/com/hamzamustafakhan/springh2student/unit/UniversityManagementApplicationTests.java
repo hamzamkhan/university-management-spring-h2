@@ -2,7 +2,7 @@ package com.hamzamustafakhan.springh2student.unit;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,19 +21,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 @RunWith(SpringRunner.class)
-class UniversityManagementApplicationTests {
+public class UniversityManagementApplicationTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void contextLoads() {
+    public void contextLoads() {
     }
 
 
     @Test
     @SneakyThrows
-    void createStudent(){
+    public void createStudent(){
         log.info("Testing: creating a student");
         mockMvc.perform(MockMvcRequestBuilders.post("/api/student")
                 .content("{\n" +
@@ -52,7 +52,7 @@ class UniversityManagementApplicationTests {
 
     @Test
     @SneakyThrows
-    void createExistingStudent(){
+    public void createExistingStudent(){
         log.info("Testing: creating an existing student");
         createStudent();
         mockMvc.perform(MockMvcRequestBuilders.post("/api/student")
@@ -73,7 +73,7 @@ class UniversityManagementApplicationTests {
 
     @Test
     @SneakyThrows
-    void getStudentById(){
+    public void getStudentById(){
         log.info("Testing: get student by id");
         createStudent();
         mockMvc.perform(MockMvcRequestBuilders.get("/api/student/1"))
@@ -84,7 +84,7 @@ class UniversityManagementApplicationTests {
 
     @Test
     @SneakyThrows
-    void getStudentByIdNotFound(){
+    public void getStudentByIdNotFound(){
         log.info("Testing: get student by id");
         createStudent();
         mockMvc.perform(MockMvcRequestBuilders.get("/api/student/2"))
@@ -95,7 +95,7 @@ class UniversityManagementApplicationTests {
 
     @Test
     @SneakyThrows
-    void updateStudent(){
+    public void updateStudent(){
         log.info("Testing: update student");
         createStudent();
         mockMvc.perform(MockMvcRequestBuilders.put("/api/student/email/1")
@@ -111,7 +111,7 @@ class UniversityManagementApplicationTests {
 
     @Test
     @SneakyThrows
-    void createProfessor(){
+    public void createProfessor(){
         log.info("Testing: create professor");
         mockMvc.perform(MockMvcRequestBuilders.post("/api/professor")
                 .content("{\n" +
@@ -127,7 +127,7 @@ class UniversityManagementApplicationTests {
 
     @Test
     @SneakyThrows
-    void createProfessorFailed(){
+    public void createProfessorFailed(){
         log.info("Testing: create existing professor");
         createProfessor();
         mockMvc.perform(MockMvcRequestBuilders.post("/api/professor")
@@ -145,7 +145,7 @@ class UniversityManagementApplicationTests {
 
     @Test
     @SneakyThrows
-    void getProfessorById(){
+    public void getProfessorById(){
         log.info("Testing: get professor by id");
         createProfessor();
         mockMvc.perform(MockMvcRequestBuilders.get("/api/professor/1"))
@@ -156,7 +156,7 @@ class UniversityManagementApplicationTests {
 
     @Test
     @SneakyThrows
-    void getProfessorByIdNotFound(){
+    public void getProfessorByIdNotFound(){
         log.info("Testing: get professor by id");
         createStudent();
         mockMvc.perform(MockMvcRequestBuilders.get("/api/professor/2"))
@@ -167,7 +167,7 @@ class UniversityManagementApplicationTests {
 
     @Test
     @SneakyThrows
-    void createRegistration(){
+    public void createRegistration(){
         log.info("Testing: creating registration");
         createStudent();
         createProfessor();

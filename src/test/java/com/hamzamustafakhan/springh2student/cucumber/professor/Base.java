@@ -19,10 +19,8 @@ public class Base {
     public static WebDriver webDriver;
 
     public void initialization(String url){
-        if(webDriver == null){
-            WebDriverManager.chromedriver().setup();
-            webDriver = new ChromeDriver();
-        }
+        WebDriverManager.chromedriver().setup();
+        webDriver = new ChromeDriver();
         openBrowser(url);
     }
 
