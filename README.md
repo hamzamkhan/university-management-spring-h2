@@ -1,6 +1,6 @@
-# Spring H2 University Database Example
+# University Management System
 
-This project deals with university database using H2 database presenting as an example with its CRUD operations
+This project deals with university management system using H2 database presenting with its CRUD operations
 
 - **Flow of the system**
     - Open the code on any editor (IntelliJ, VSCode, etc.)
